@@ -1,13 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "util.h"
 int main() {
-    // int c;
-    // FILE *file;
-    // file = fopen("main.c", "r");
-    // if (file) {
-        // while ((c = getc(file)) != EOF)
-            // putchar(c);
-        // fclose(file);
-    // }
     printf("SPL - Some Programming Language");
+    char* fileContents = readFile("main.c");
+    printf("%s", fileContents);
+    free(fileContents);
     return 0;
 }
