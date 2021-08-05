@@ -53,6 +53,10 @@ TokenList parse(char* source) {
                 type = TOKEN_FOR;
             } else if (!strcmp(all, "fn")) {
                 type = TOKEN_FN;
+            } else if (!strcmp(all, "true")) {
+                type = TOKEN_TRUE;
+            } else if (!strcmp(all, "false")) {
+                type = TOKEN_FALSE;
             } else {
                 type = TOKEN_IDENTIFIER;
             }
@@ -81,6 +85,18 @@ TokenList parse(char* source) {
         } else if (first == ',') {
             length = 1;
             type = TOKEN_COMMA;
+        } else if (first == '+') {
+            length = 1;
+            type = TOKEN_PLUS;
+        } else if (first == '-') {
+            length = 1;
+            type = TOKEN_MINUS;
+        } else if (first == '/') {
+            length = 1;
+            type = TOKEN_SLASH;
+        } else if (first == '*') {
+            length = 1;
+            type = TOKEN_STAR;
         } else {
             fprintf(stderr,
                     "Error while parsing : unexpected character : %c (hex "
@@ -137,5 +153,17 @@ char* tokenTypeToString(TokenType type) {
             return "FN";
         case TOKEN_COMMA:
             return "COMMA";
+        case TOKEN_TRUE:
+            return "TRUE";
+        case TOKEN_FALSE:
+            return "FALSE";
+        case TOKEN_PLUS:
+            return "PLUS";
+        case TOKEN_MINUS:
+            return "MINUS";
+        case TOKEN_SLASH:
+            return "SLASH";
+        case TOKEN_STAR:
+            return "STAR";
     }
 }

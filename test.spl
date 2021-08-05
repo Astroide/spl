@@ -1,13 +1,10 @@
-'t' `a` "s"
-1.0 "
-=1.0"
-    minet01
-    chien
-        fn for while
-            chat
-
-Ii
-Aa Bb Nn
-0
-{}()[]
-{([])}
+while true {
+    print(false)
+}
+"texte"
+`texte`
+'texte'
+1.0,2.0
+fn truc(a) {
+    return a * 2
+}
