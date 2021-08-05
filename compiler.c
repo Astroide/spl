@@ -17,16 +17,22 @@ Token* _compiler_currentToken;
 #define tokens _compiler_tokens
 #define currentToken _compiler_currentToken
 
-#define growInstructionListCapacity _compiler_growInstructionListCapacity
-void _compiler_growInstructionListCapacity() {
-    instructionListCapacity += 50;
-    instructionList.list = reallocate(
-        instructionList.list, sizeof(Instruction) * instructionListCapacity);
+#define growInstructionListCapacityIfNeeded \
+    _compiler_growInstructionListCapacityIfNeeded
+void _compiler_growInstructionListCapacityIfNeeded() {
+    if ((instructionListCapacity - instructionList.length) <= 2) {
+        instructionListCapacity += 50;
+        instructionList.list =
+            reallocate(instructionList.list,
+                       sizeof(Instruction) * instructionListCapacity);
+    }
 }
 
 Token getToken() { return *(currentToken++); }
 
 bool match(TokenType type) { return currentToken->type == type; }
+
+void expression() {}
 
 InstructionList compile(TokenList tkns) {
     tokens = tkns;
@@ -39,6 +45,6 @@ InstructionList compile(TokenList tkns) {
 }
 
 #undef tokens
-#undef growInstructionListCapacity
+#undef growInstructionListCapacityIfNeeded
 #undef instructionList
 #undef instructionListCapacity
