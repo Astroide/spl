@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "instructions.h"
 #include "parser.h"
 #include "util.h"
-#include "vm.h"
 
 TokenList _compiler_tokens;
 InstructionList _compiler_instructionList;
@@ -32,7 +32,10 @@ Token getToken() { return *(currentToken++); }
 
 bool match(TokenType type) { return currentToken->type == type; }
 
-void expression() {}
+void expression() {
+    if (match(TOKEN_NUMBER))
+        ;
+}
 
 InstructionList compile(TokenList tkns) {
     tokens = tkns;
