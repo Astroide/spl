@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "instructions.h"
+#include "bytecode.h"
 #include "parser.h"
 #include "util.h"
 
