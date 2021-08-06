@@ -13,7 +13,7 @@
 TokenList parse(char* source) {
     int tokenCapacity = 20;
     TokenList tokens = {.length = 0,
-                        .list = malloc(sizeof(Token) * tokenCapacity)};
+                        .list = allocate(sizeof(Token) * tokenCapacity)};
     size_t sourceLength = strlen(source);
     int currentCharacter = 0;
     int lineNo = 1;

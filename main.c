@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "bytecode.h"
 #include "parser.h"
 #include "util.h"
 int main() {
@@ -17,5 +18,23 @@ int main() {
     }
 
     free(fileContents);
+    double* nConstants = allocate(sizeof(double) * 4);
+    nConstants[0] = 0.0;
+    nConstants[1] = 1.0;
+    nConstants[2] = 2.0;
+    nConstants[3] = 64.0;
+    char** stringConstants = allocate(sizeof(char**) * 2);
+    stringConstants[0] = "chien";
+    stringConstants[1] = "chat";
+    Bytecode testBytecode = {.length = 0,
+                             .list = NULL,
+                             .constants = {.numberConstants = nConstants,
+                                           .numberConstantsLength = 4,
+                                           .stringConstants = stringConstants,
+                                           .stringConstantsLength = 2}};
+    // FILE* handle = fopen("out.btc", "w");
+    // writeBytecodeToFile(handle, testBytecode);
+    // fflush(handle);
+    // fclose(handle);
     return 0;
 }

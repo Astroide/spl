@@ -42,7 +42,7 @@ Bytecode compile(TokenList tkns) {
     instructionListCapacity = 50;
     instructionList.length = 0;
     instructionList.list =
-        malloc(sizeof(Instruction) * instructionListCapacity);
+        allocate(sizeof(Instruction) * instructionListCapacity);
 
     return instructionList;
 }
