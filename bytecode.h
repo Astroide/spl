@@ -19,4 +19,6 @@ typedef struct {
 
 void writeBytecodeToFile(FILE* file, Bytecode bytecode);
 
+Bytecode readBytecodeFromFile(FILE* file);
+
 #endif

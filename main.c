@@ -4,6 +4,7 @@
 #include "bytecode.h"
 #include "parser.h"
 #include "util.h"
+
 int main() {
     printf("SPL - Some Programming Language\n");
     char* fileContents = readFile("test.spl");
@@ -22,8 +23,8 @@ int main() {
     nConstants[0] = 0.0;
     nConstants[1] = 1.0;
     nConstants[2] = 2.0;
-    nConstants[3] = 64.0;
-    char** stringConstants = allocate(sizeof(char**) * 2);
+    nConstants[3] = 64.5;
+    char** stringConstants = allocate(sizeof(char*) * 2);
     stringConstants[0] = "chien";
     stringConstants[1] = "chat";
     Bytecode testBytecode = {.length = 0,
@@ -32,9 +33,18 @@ int main() {
                                            .numberConstantsLength = 4,
                                            .stringConstants = stringConstants,
                                            .stringConstantsLength = 2}};
-    // FILE* handle = fopen("out.btc", "w");
-    // writeBytecodeToFile(handle, testBytecode);
-    // fflush(handle);
-    // fclose(handle);
+    FILE* handle = fopen("out.btc", "w");
+    writeBytecodeToFile(handle, testBytecode);
+    fflush(handle);
+    fclose(handle);
+    handle = fopen("out.btc", "r");
+    Bytecode bytecode = readBytecodeFromFile(handle);
+    for (size_t i = 0; i < bytecode.constants.stringConstantsLength; i++) {
+        printf("STRCONST %zu <%s>\n", i, bytecode.constants.stringConstants[i]);
+    }
+    for (size_t i = 0; i < bytecode.constants.numberConstantsLength; i++) {
+        printf("NUMCONST %zu <%f>\n", i, bytecode.constants.numberConstants[i]);
+    }
+    fclose(handle);
     return 0;
 }

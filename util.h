@@ -21,4 +21,19 @@ char* _util_charAsStringCharArray;
 
 char* startAndLengthToString(char* start, int length);
 
+uint64_t swapEndian(uint64_t number);
+
+int isLittleEndian();
+
+int stringStartsWith(char* string, char* prefix);
+
+union __util_dtl__ {
+    uint64_t uint64;
+    double dbl;
+};
+
+uint64_t doubleToUint64Bits(double number);
+
+double uint64ToDoubleBits(uint64_t number);
+
 #endif

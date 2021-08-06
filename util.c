@@ -19,8 +19,8 @@ void* reallocate(void* source, size_t size) {
 }
 
 char* readFile(char filename[]) {
-    int c;
     FILE* file;
+    int c;
     file = fopen(filename, "r");
     size_t capacity = sizeof(char) * 512;
     char* contents = allocate(capacity);
@@ -67,4 +67,41 @@ char* startAndLengthToString(char* start, int length) {
 void* __malloc__(int size, char* file, int line) {
     printf("malloc size %d in file %s on line %d\n", size, file, line);
     return malloc(size);
+}
+
+uint64_t swapEndian(uint64_t number) {
+    uint64_t b0, b1, b2, b3, b4, b5, b6, b7;
+
+    b0 = (number & 0x00000000000000ff) << 56u;
+    b1 = (number & 0x000000000000ff00) << 40u;
+    b2 = (number & 0x0000000000ff0000) << 24u;
+    b3 = (number & 0x00000000ff000000) << 8u;
+    b4 = (number & 0x000000ff00000000) << 8u;
+    b5 = (number & 0x0000ff0000000000) << 24u;
+    b6 = (number & 0x00ff000000000000) << 40u;
+    b7 = (number & 0xff00000000000000) << 56u;
+
+    return b0 | b1 | b2 | b3 | b4 | b5 | b6 | b7;
+}
+
+int isLittleEndian() {
+    int x = 1;
+    char* y = (char*)&x;
+    return (int)(*y);
+}
+
+int stringStartsWith(char* string, char* prefix) {
+    return strncmp(prefix, string, strlen(prefix)) == 0;
+}
+
+uint64_t doubleToUint64Bits(double number) {
+    union __util_dtl__ instance;
+    instance.dbl = number;
+    return instance.uint64;
+}
+
+double uint64ToDoubleBits(uint64_t number) {
+    union __util_dtl__ instance;
+    instance.uint64 = number;
+    return instance.dbl;
 }
