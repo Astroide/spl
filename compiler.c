@@ -8,7 +8,7 @@
 #include "util.h"
 
 TokenList _compiler_tokens;
-InstructionList _compiler_instructionList;
+Bytecode _compiler_instructionList;
 int _compiler_instructionListCapacity;
 Token* _compiler_currentToken;
 
@@ -37,7 +37,7 @@ void expression() {
         ;
 }
 
-InstructionList compile(TokenList tkns) {
+Bytecode compile(TokenList tkns) {
     tokens = tkns;
     instructionListCapacity = 50;
     instructionList.length = 0;

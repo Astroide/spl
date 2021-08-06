@@ -4,6 +4,6 @@
 #include "bytecode.h"
 #include "parser.h"
 
-InstructionList compile(TokenList tkns);
+Bytecode compile(TokenList tkns);
 
 #endif
