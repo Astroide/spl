@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,18 +20,19 @@ int main() {
     }
 
     free(fileContents);
-    double* nConstants = allocate(sizeof(double) * 4);
+    double* nConstants = allocate(sizeof(double) * 5);
     nConstants[0] = 0.0;
     nConstants[1] = 1.0;
     nConstants[2] = 2.0;
     nConstants[3] = 64.5;
+    nConstants[4] = 65536.f;
     char** stringConstants = allocate(sizeof(char*) * 2);
     stringConstants[0] = "chien";
     stringConstants[1] = "chat";
     Bytecode testBytecode = {.length = 0,
                              .list = NULL,
                              .constants = {.numberConstants = nConstants,
-                                           .numberConstantsLength = 4,
+                                           .numberConstantsLength = 5,
                                            .stringConstants = stringConstants,
                                            .stringConstantsLength = 2}};
     FILE* handle = fopen("out.btc", "w");
